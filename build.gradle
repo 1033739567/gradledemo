@@ -1,0 +1,67 @@
+
+
+plugins {
+    id 'org.springframework.boot' version '2.2.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+
+
+group = 'cn.chenlilin'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+sourceSets.main.resources.srcDirs = ["src/main/java","src/main/resources"]
+
+// 打包jar
+jar {
+    manifest {
+        attributes('Main-Class': 'cn.chenlilin.GradledemoApplication')
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        resources {
+            //这里的srcDir是方法，上面的是属性
+            srcDir 'src/main/java' //可以将java目录下的所有非.java资源打包到classes下
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'
+    // https://mvnrepository.com/artifact/tk.mybatis/mapper-spring-boot-starter
+    compile group: 'tk.mybatis', name: 'mapper-spring-boot-starter', version: '2.0.2'
+    // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.3.0'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.6.RELEASE'
+
+}
+
+processResources {
+    from('src/main/java') {
+        include '**/*.xml'
+    }
+}
+
+/*test {
+    useJUnitPlatform()
+}*/
+
+/*task copyResourceToClasse(type: copy){
+    from "${projectDir}/src/main/java/cn/chenlilin/mapper/*.xml"
+    into "${buildDir}/classes/cn/chenlilin/mapper"
+}*/
+
+

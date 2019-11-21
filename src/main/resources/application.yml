@@ -1,0 +1,42 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    ###test
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/trackable_manage?characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+
+    ####show
+    #driver-class-name: com.mysql.jdbc.Driver
+    #url: jdbc:mysql://47.75.178.24:3306/trackable_manage_show?characterEncoding=utf8&useSSL=false
+    #username: root
+    #password: eW70jY2paDf#&*
+
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    #useGlobalDataSourceStat=true
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:cn/chenlilin/mapper/*.xml
+  type-aliases-package: cn.chenlilin.entity.table
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countsql
